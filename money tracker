@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #app {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label, input, select, button {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 8px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <h1>Money Tracker</h1>
+        <label for="type">Type:</label>
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount" required>
+
+        <button onclick="addTransaction()">Add Transaction</button>
+
+        <h2>Transactions</h2>
+        <ul id="transactions"></ul>
+    </div>
+
+    <script>
+        function addTransaction() {
+            var type = document.getElementById('type').value;
+            var amount = parseFloat(document.getElementById('amount').value);
+
+            if (isNaN(amount)) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            var transactionsList = document.getElementById('transactions');
+            var listItem = document.createElement('li');
+            listItem.innerHTML = type.charAt(0).toUpperCase() + type.slice(1) + ': $' + amount.toFixed(2);
+            transactionsList.appendChild(listItem);
+
+            // You can add more logic here to update the total balance, store data, etc.
+
+            // Clear the input fields
+            document.getElementById('type').value = 'income';
+            document.getElementById('amount').value = '';
+        }
+    </script>
+
+</body>
+</html>
